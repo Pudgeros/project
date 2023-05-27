@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Подключаем Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <title>
+  {% block title %}
+  {% endblock %}
+  </title>
+</head>
+<body>
+  <div id="wrapper">
+
+    <a name="top"></a>
+    
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <span class="navbar-brand">News</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}"><i class="fa-solid fa-newspaper"></i> Новости</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('add_news') }}"><i class="fa-solid fa-square-plus"></i> Добавить новость</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container my-3">
+      <div class="row">
+        <div class="col-md-8">
+          {% block content %}
+          {% endblock %}
+        </div>
+          <div class="col-md-4">
+          <h5>Категории</h5>
+          <ul class="list-group">
+            <!-- <li class="list-group-item my-links"><a href="{{ url_for('index') }}">Все новости</a></li> -->
+            <a href="{{ url_for('index') }}" class="my-links"><li class="list-group-item my-links">Все новости</li></a>
+            {% for category in categories %}
+            <!-- <li class="list-group-item my-links"><a href="{{ url_for('news_in_category', id=category.id) }}">{{ category.title }}</a></li> -->
+            <a href="{{ url_for('news_in_category', id=category.id) }}" class="my-links"><li class="list-group-item my-links">{{ category.title }}</li></a>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="anchor">
+          <p><a href="#top" class="anchor-btn"><i class="fa-sharp fa-solid fa-circle-arrow-up"></i></a></p>
+        </div>
+
+      </div>
+    </div>
+
+    <footer id="footer" class="bg-dark text-white text-center py-3 ftr">
+      &copy; 2023 Новости. Все права защищены.
+    </footer>
+  </div>
+
+    <!-- Подключаем Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="https://kit.fontawesome.com/a193923372.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/myjs.js') }}"></script>
+</body>
+</html>
